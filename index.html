@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SANTI VIRELINTH | EDITING SYSTEM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #8b5cf6; --bg: #fdfbff; }
+        body { 
+            background-color: var(--bg);
+            background-image: radial-gradient(#ddd6fe 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            font-family: 'Inter', sans-serif;
+            color: #1f2937;
+            scroll-behavior: smooth;
+        }
+        .bento-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #e9d5ff;
+            transition: all 0.3s ease;
+        }
+        .bento-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.15);
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .sticky-nav { position: sticky; bottom: 1.5rem; z-index: 50; }
+        input[type="checkbox"] { width: 1.1rem; height: 1.1rem; accent-color: var(--primary); cursor: pointer; }
+        #order-form-section { display: none; }
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+
+    <!-- LANDING PAGE -->
+    <div id="landing-section" class="max-w-6xl mx-auto min-h-[90vh] flex flex-col justify-center fade-in">
+        <header class="mb-16">
+            <h1 class="text-[10px] font-black tracking-[0.5em] text-purple-500 mb-4 uppercase">Editing Post-Production</h1>
+            <h2 class="text-6xl md:text-8xl font-black tracking-tighter text-slate-900 leading-none">SANTI <br>VIRELINTH</h2>
+            <p class="mt-6 text-slate-500 max-w-sm text-sm leading-relaxed font-medium">Lavender-themed aesthetic solutions for digital assets. Precision in every pixel.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bento-card p-8 rounded-[2rem] md:col-span-2">
+                <h3 class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Standard Protocols</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-medium leading-relaxed uppercase tracking-wide">
+                    <ul class="space-y-4">
+                        <li class="flex gap-3"><span class="text-purple-500 font-bold">01</span> Duration: 3-5 business days.</li>
+                        <li class="flex gap-3"><span class="text-purple-500 font-bold">02</span> Rush fee applies for 24h delivery.</li>
+                        <li class="flex gap-3"><span class="text-purple-500 font-bold">03</span> Payment First Policy (Full/Half).</li>
+                    </ul>
+                    <ul class="space-y-4 text-slate-400">
+                        <li class="flex gap-3">Non-payment after service results in blacklisting.</li>
+                        <li class="flex gap-3">Verify all details before submission.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bento-card p-8 rounded-[2rem] bg-slate-900 text-white flex flex-col justify-between">
+                <div>
+                    <span class="text-[10px] font-bold tracking-widest text-purple-400 uppercase">System Access</span>
+                    <p class="text-xl font-medium mt-2">Ready to Avail?</p>
+                </div>
+                <button onclick="startOrder()" class="mt-8 bg-purple-600 hover:bg-purple-500 text-white font-bold py-4 rounded-2xl transition-all uppercase text-[10px] tracking-widest">
+                    Initialize Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ORDER FORM SECTION -->
+    <div id="order-form-section" class="max-w-6xl mx-auto fade-in pb-20">
+        <nav class="flex justify-between items-center mb-12 border-b border-purple-100 pb-6">
+            <span class="mono text-[10px] font-bold uppercase tracking-widest text-purple-400">Order System v3.0 // Lavender Edition</span>
+            <button onclick="location.reload()" class="text-[10px] uppercase font-bold text-slate-400 hover:text-slate-900 transition underline underline-offset-4">Reset Session</button>
+        </nav>
+
+        <form action="https://formspree.io/f/xnjbrwnl" method="POST" enctype="multipart/form-data" class="space-y-6">
+            
+            <!-- IDENTITY & SPECS -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bento-card p-8 rounded-[2rem] space-y-6">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">01 Identity</p>
+                    <input type="text" name="Name" required placeholder="Full Name" class="w-full bg-purple-50/50 p-4 rounded-xl text-sm outline-none focus:ring-1 focus:ring-purple-400">
+                    <input type="text" name="Handle" required placeholder="@Social Handle" class="w-full bg-purple-50/50 p-4 rounded-xl text-sm outline-none focus:ring-1 focus:ring-purple-400">
+                </div>
+                <div class="bento-card p-8 rounded-[2rem] lg:col-span-2 space-y-6">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">02 Direction & Inclusions</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" name="Theme" required placeholder="Theme/Aesthetic (e.g. Grunge, Soft)" class="w-full bg-purple-50/50 p-4 rounded-xl text-sm outline-none focus:ring-1 focus:ring-purple-400">
+                        <input type="text" name="Colors" placeholder="Preferred Color Palette" class="w-full bg-purple-50/50 p-4 rounded-xl text-sm outline-none focus:ring-1 focus:ring-purple-400">
+                    </div>
+                    <textarea name="Text_Inclusions" required rows="2" placeholder="Specific Names/Titles to include in the edit..." class="w-full bg-purple-50/50 p-4 rounded-xl text-sm outline-none focus:ring-1 focus:ring-purple-400"></textarea>
+                </div>
+            </div>
+
+            <!-- THE FULL CHECKLIST -->
+            <div class="bento-card p-8 md:p-12 rounded-[2.5rem]">
+                <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-10 text-center">Comprehensive Service Menu</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-12 mono text-[11px] uppercase tracking-tight">
+                    <!-- Stamps -->
+                    <div class="space-y-4">
+                        <p class="font-black text-purple-600 border-b border-purple-50 pb-2 mb-4">01 Stamps/Stixx</p>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Stamps[]" value="1pc" data-price="5" class="item-check mr-3"> 1pc</span> <span class="text-slate-300">5gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Stamps[]" value="2pcs" data-price="5" class="item-check mr-3"> 2pcs</span> <span class="text-slate-300">5gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Stamps[]" value="3pcs" data-price="7" class="item-check mr-3"> 3pcs</span> <span class="text-slate-300">7gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Stamps[]" value="4pcs" data-price="8" class="item-check mr-3"> 4pcs</span> <span class="text-slate-300">8gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Stamps[]" value="5pcs" data-price="10" class="item-check mr-3"> 5pcs</span> <span class="text-slate-300">10gc</span></label>
+                    </div>
+
+                    <!-- Watermarks -->
+                    <div class="space-y-4">
+                        <p class="font-black text-purple-600 border-b border-purple-50 pb-2 mb-4">02 Watermarks</p>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="WM[]" value="1pc" data-price="2" class="item-check mr-3"> 1pc</span> <span class="text-slate-300">2gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="WM[]" value="2pcs" data-price="3" class="item-check mr-3"> 2pcs</span> <span class="text-slate-300">3gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="WM[]" value="3pcs" data-price="5" class="item-check mr-3"> 3pcs</span> <span class="text-slate-300">5gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="WM[]" value="4pcs" data-price="7" class="item-check mr-3"> 4pcs</span> <span class="text-gray-300">7gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="WM[]" value="5pcs" data-price="10" class="item-check mr-3"> 5pcs</span> <span class="text-gray-300">10gc</span></label>
+                    </div>
+
+                    <!-- Layouts -->
+                    <div class="space-y-4">
+                        <p class="font-black text-purple-600 border-b border-purple-50 pb-2 mb-4">03 Layouts</p>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Layouts[]" value="pfp+cp" data-price="10" class="item-check mr-3"> pfp+cp</span> <span class="text-slate-300">10gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Layouts[]" value="pfp+hl" data-price="15" class="item-check mr-3"> pfp+hl</span> <span class="text-slate-300">15gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Layouts[]" value="pfp+pinned" data-price="15" class="item-check mr-3"> pfp+pinned</span> <span class="text-slate-300">15gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Layouts[]" value="pinned+hl" data-price="20" class="item-check mr-3"> pinned+hl</span> <span class="text-slate-300">20gc</span></label>
+                        <label class="flex justify-between items-center group cursor-pointer"><span><input type="checkbox" name="Layouts[]" value="pfp+cp+hl" data-price="20" class="item-check mr-3"> pfp+cp+hl</span> <span class="text-slate-300">20gc</span></label>
+                    </div>
+
+                    <!-- Templates -->
+                    <div class="space-y-4">
+                        <p class="font-black text-purple-600 border-b border-purple-50 pb-2 mb-4">04 Templates</p>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Templates[]" value="pot" data-price="10" class="item-check mr-3"> pot</span> <span class="text-gray-300">10gc</span></label>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Templates[]" value="qr" data-price="15" class="item-check mr-3"> qr merch</span> <span class="text-gray-300">15gc</span></label>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Templates[]" value="solo" data-price="15" class="item-check mr-3"> solo cover</span> <span class="text-gray-300">15gc</span></label>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Templates[]" value="duo" data-price="25" class="item-check mr-3"> duo cover</span> <span class="text-gray-300">25gc</span></label>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Templates[]" value="group" data-price="35" class="item-check mr-3"> group cover</span> <span class="text-gray-300">35gc</span></label>
+                    </div>
+
+                    <!-- Sets -->
+                    <div class="space-y-4">
+                        <p class="font-black text-purple-600 border-b border-purple-100 pb-2 mb-4">05 Sets</p>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Sets[]" value="seller1" data-price="20" class="item-check mr-3"> seller 01</span> <span class="text-gray-300">20gc</span></label>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Sets[]" value="seller2" data-price="30" class="item-check mr-3"> seller 02</span> <span class="text-gray-300">30gc</span></label>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Sets[]" value="seller3" data-price="50" class="item-check mr-3"> seller 03</span> <span class="text-gray-300">50gc</span></label>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Sets[]" value="hood1" data-price="30" class="item-check mr-3"> hood 01</span> <span class="text-gray-300">30gc</span></label>
+                        <label class="flex justify-between items-center"><span><input type="checkbox" name="Sets[]" value="hood2" data-price="50" class="item-check mr-3"> hood 02</span> <span class="text-gray-300">50gc</span></label>
+                    </div>
+
+                    <!-- Promo & Others -->
+                    <div class="space-y-4">
+                        <p class="font-black text-purple-600 border-b border-purple-50 pb-2 mb-4">06 Promo & Extra</p>
+                        <label class="flex justify-between items-center p-2 bg-purple-50 rounded-lg"><span><input type="checkbox" name="Promo[]" value="p+q" data-price="20" class="item-check mr-3"> pot + qr</span> <span class="text-purple-400">20gc</span></label>
+                        <label class="flex justify-between items-center p-2 bg-purple-50 rounded-lg"><span><input type="checkbox" name="Promo[]" value="all" data-price="30" class="item-check mr-3"> pinned+wm+qr</span> <span class="text-purple-400">30gc</span></label>
+                        <label class="flex justify-between items-center mt-6"><span><input type="checkbox" name="Others[]" value="poster" data-price="30" class="item-check mr-3"> poster</span> <span class="text-gray-300">30gc</span></label>
+                        <textarea name="Custom_Desc" placeholder="Other custom requests..." class="w-full mt-4 bg-slate-50 p-3 rounded-lg text-[10px] outline-none border border-transparent focus:border-purple-200"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAYMENT & VERIFICATION -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bento-card p-10 rounded-[2.5rem] flex flex-col md:flex-row justify-between items-center gap-10">
+                    <div class="w-full md:w-1/2">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Settlement</p>
+                        <p class="text-xs font-bold text-slate-800 mb-2 uppercase">GCash Account</p>
+                        <div class="bg-slate-900 text-white p-5 rounded-2xl mono text-xl tracking-widest text-center">09161453006 [E.J.I.C]</div>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-6">Verification</p>
+                        <label class="block text-[10px] font-bold mb-3 uppercase tracking-widest opacity-40">Proof of Payment</label>
+                        <input type="file" name="Receipt" required class="block w-full text-xs file:mr-4 file:py-3 file:px-6 file:rounded-xl file:border-0 file:text-[10px] file:font-black file:bg-slate-100 file:text-slate-900 cursor-pointer uppercase">
+                    </div>
+                </div>
+
+                <div class="bento-card p-10 rounded-[2.5rem]">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-red-400 mb-6">Priority</p>
+                    <label class="flex justify-between items-center p-6 bg-red-50 rounded-3xl cursor-pointer">
+                        <span class="text-xs font-bold text-red-600 flex items-center">
+                            <input type="checkbox" name="Rush_Fee" value="Applied" data-price="10" class="item-check mr-4"> 
+                            Enable Rush
+                        </span>
+                        <span class="mono text-xs font-black text-red-300">+10gc</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- STICKY SUMMARY BAR -->
+            <div class="sticky-nav max-w-lg mx-auto bg-white/90 backdrop-blur-xl border border-purple-100 p-4 rounded-[2rem] flex justify-between items-center shadow-2xl">
+                <div class="px-6 border-r border-slate-100">
+                    <p class="text-[8px] font-black text-slate-400 uppercase tracking-[0.2em]">Current Bill</p>
+                    <p class="text-3xl font-black text-slate-900 tracking-tighter"><span id="total-val">0</span> <span class="text-xs font-normal text-slate-400">GC</span></p>
+                </div>
+                <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white px-10 py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all shadow-lg shadow-purple-200">
+                    Authorize Order
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        const checks = document.querySelectorAll('.item-check');
+        const totalDisp = document.getElementById('total-val');
+
+        // Automatic Math Logic
+        checks.forEach(c => {
+            c.addEventListener('change', () => {
+                let current = 0;
+                checks.forEach(i => {
+                    if (i.checked) current += parseInt(i.dataset.price);
+                });
+                totalDisp.innerText = current;
+            });
+        });
+
+        // Toggle Section Visibility
+        function startOrder() {
+            document.getElementById('landing-section').classList.add('opacity-0');
+            setTimeout(() => {
+                document.getElementById('landing-section').style.display = 'none';
+                document.getElementById('order-form-section').style.display = 'block';
+                window.scrollTo(0,0);
+            }, 400);
+        }
+    </script>
+</body>
+</html>
